@@ -1,0 +1,20 @@
+<div>
+  <h1 class="text-4xl font-medium">
+    <%= post.title %>
+  </h1>
+  <!-- Author -->
+  <small class="font-light text-neutral-500 mb-4 block">by <%= post.author %></small>
+  <!-- Content (Convert breaklines to html) -->
+  <p class="font-light text-lg">
+    <!-- <%= post.content %> -->
+    <%- post.content.replace(/\n/g, '<br>') %>
+  </p>
+  <!-- Buttons -->
+  <div class="flex gap-1">
+    <a class="text-primary" href="/posts/edit/<%= post._id %>">Edit</a>
+    <form class="text-red-600" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</div>

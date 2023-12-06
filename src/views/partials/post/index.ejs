@@ -1,0 +1,74 @@
+<h1 class="text-4xl font-medium">Posts List</h1>
+<div class="flex gap-4">
+  <a class="text-primary" href="/posts/create">Create New Post</a>
+  <a class="text-primary" href="/post-categories">View all categories</a>
+</div>
+
+
+
+<div class="border rounded p-2 flex gap-2 overflow-x-auto">
+  <% postCategories.forEach(postCategory=> { %>
+    <div>
+      <a class="<%=
+          isCurrentCategory(postCategory.id)
+            ? 'text-primary'
+            : 'text-neutral-500'
+           %>" href="javascript:void" onclick="filterByCategory('<%= postCategory.id %>')">
+        <%= postCategory.name %>
+      </a>
+    </div>
+    <% }); %>
+</div>
+
+<div class="flex flex-col gap-4 py-4">
+
+  <% posts.forEach(post=> { %>
+    <div class="flex justify-between items-center gap-8">
+      <div>
+        <div class="rounded inline-block px-1 bg-primary-100">
+          <p class="text-sm text-neutral-600">
+            <%= post.category.name %>
+          </p>
+        </div>
+        <h2 class="text-xl font-medium">
+          <a href="/posts/<%= post.id%>">
+            <%= post.title %>
+          </a>
+        </h2>
+        <p class="text-neutral-500 font-light">
+          <!-- I need to show only first part of content -->
+          <%= post.content.substring(0, 100) %>...
+        </p>
+        <small class="font-light text-neutral-500">
+          by <%= post.author %>
+            |
+            <%= post.createdAt.toLocaleDateString('en', { year: 'numeric' , month: 'long' , day: 'numeric' , }) %>
+        </small>
+      </div>
+      <!-- <div class="flex gap-2">
+        <a class="text-primary" href="/posts/edit/<%= post._id %>">Edit</a>
+        <form class="text-red-600" action="/posts/delete/<%= post._id %>?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit">Delete</button>
+        </form>
+      </div> -->
+    </div>
+    <% }); %>
+</div>
+
+<script>
+  function filterByCategory(categoryId) {
+    if (window.location.href.includes(`postCategory=${categoryId}`)) {
+      window.location.href = window.location.href.replace(
+        `?postCategory=${categoryId}`,
+        ''
+      )
+    } else {
+      window.location.href = `/posts?postCategory=${categoryId}`;
+    }
+  }
+
+  function isCurrentCategory(categoryId) {
+    return window.location.href.includes(`postCategory=${categoryId}`);
+  }
+</script>

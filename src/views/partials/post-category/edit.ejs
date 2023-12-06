@@ -1,0 +1,9 @@
+<form action="/post-categories/update/<%= postCategory._id %>?_method=PUT" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  <div class="flex flex-col">
+    <label class="mb-1" for="name">Name:</label>
+    <input class="border rounded mb-2 py-1 px-2" type="text" id="name" name="name" required value="<%=postCategory.name %>">
+  </div>
+
+  <button type="submit">Update Category</button>
+</form>

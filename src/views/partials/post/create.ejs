@@ -1,0 +1,27 @@
+<form action="/posts" method="POST">
+  <div class="flex flex-col">
+    <label class="mb-1" for="title">Title:</label>
+    <input class="border rounded mb-2 py-1 px-2" type="text" id="title" name="title" required>
+  </div>
+
+  <div class="flex flex-col">
+    <label class="mb-1" for="author">Author:</label>
+    <input class="border rounded mb-2 py-1 px-2" type="text" id="author" name="author" required>
+  </div>
+
+  <div class="flex flex-col">
+    <label class="mb-1" for="content">Content:</label>
+    <textarea class="border rounded mb-2 py-1 px-2" rows="4" id="content" name="content" required></textarea>
+  </div>
+
+  <div class="flex flex-col">
+    <label class="mb-1" for="category">Category:</label>
+    <select class="border rounded mb-2 py-1 px-2" id="category" name="category" required>
+      <% postCategories.forEach(postCategory=> { %>
+        <option value="<%= postCategory._id %>"><%= postCategory.name %></option>
+      <% }); %>
+    </select>
+  </div>
+
+  <div><button class="bg-primary p-2 rounded-lg" type="submit">Create Post</button></div>
+</form>
