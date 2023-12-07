@@ -25,7 +25,7 @@ export class PostService {
     return Post.findByIdAndUpdate(id, updateData, { new: true });
   }
 
-  static async deletePostById(id: string): Promise<IPost | null> {
+  static async deletePostById(id: string) {
     return Post.findByIdAndDelete(id);
   }
 }

@@ -20,7 +20,7 @@ export class PostCategoryService {
     return PostCategory.findByIdAndUpdate(id, updateData, { new: true });
   }
 
-  static async deletePostCategoryById(id: string): Promise<IPostCategory | null> {
+  static async deletePostCategoryById(id: string) {
     return PostCategory.findByIdAndDelete(id);
   }
 }
